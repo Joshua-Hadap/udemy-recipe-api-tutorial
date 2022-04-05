@@ -1,3 +1,4 @@
+from ast import arg
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -30,9 +31,9 @@ class AdminSiteTest(TestCase):
         self.assertContains(res, self.user.email)
 
     def test_user_change_page(self):
-        """Test if the user chage page is working"""
+        """Test if the user change page is working"""
 
-        url = reverse('admin:core_user_change',args=(self.user.id,))
+        url = reverse('admin:core_user_change', args=(self.user.id,))
         res = self.client.get(url)
 
         self.assertEqual(res.status_code, 200)
