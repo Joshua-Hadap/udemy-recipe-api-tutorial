@@ -7,7 +7,6 @@ from core import models
 from recipe import serializers
 
 TAGS_URL = reverse('recipe:tag-list')
-
 class PublicTagsApiTest(TestCase):
 
     def setUp(self):
@@ -78,3 +77,10 @@ class PrivateTagsApiTest(TestCase):
         res = self.client.post(TAGS_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_tag_str(self):
+
+        tag = models.Tag.objects.create(user=self.user, name='Vegan')
+
+        self.assertEqual(str(tag), 'Vegan')
+        
